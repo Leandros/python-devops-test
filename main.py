@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import subcommands.deploy
+import subcommands.upload
 
 
 if __name__ == '__main__':
@@ -28,10 +29,20 @@ if __name__ == '__main__':
                                action="store",
                                choices=["frontend", "backend"])
 
+    #upload
+    upload_parser = subparser.add_parser("upload")
+    upload_parser.add_argument("filepath",
+                               help="Path to file to be uploaded",
+                               action="store"
+                               )
+
     args = parser.parse_args()
 
     if args.subparser == "deploy":
         subcommands.deploy.deploy(args.to, args.project)
+
+    if args.subparser == "upload":
+        subcommands.upload.upload(args.filepath)
 
 # Doxy.me Senior DevOps Coding Challenge:
 #
